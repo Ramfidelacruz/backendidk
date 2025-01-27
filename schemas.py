@@ -33,3 +33,7 @@ class Prediction(PredictionBase):
     created_at: datetime
     class Config:
         orm_mode = True
+
+class PasswordReset(BaseModel):
+    email: str
+    new_password: str

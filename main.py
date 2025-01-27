@@ -123,6 +123,17 @@ def create_prediction(prediction: schemas.PredictionCreate, db: Session = Depend
     db.refresh(db_prediction)
     return db_prediction
 
+@app.post("/reset-password/")
+def reset_password(reset_data: schemas.PasswordReset, db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.email == reset_data.email).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    
+    hashed_password = pwd_context.hash(reset_data.new_password)
+    user.hashed_password = hashed_password
+    db.commit()
+    return {"message": "Contraseña actualizada"}
+
 def create_access_token(data: dict):
     to_encode = data.copy()
     expire = datetime.utcnow() + timedelta(minutes=60)
