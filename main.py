@@ -32,11 +32,11 @@ app.add_middleware(
 async def get_matches():
     return get_champions_matches()
 
-@app.get("/matches/formatted")
+@app.get("/matches/formatted/")
 async def get_formatted_matches():
     return get_formatted_matches()
 
-@app.get("/matches/upcoming")
+@app.get("/matches/upcoming/")
 async def upcoming_matches():
     return get_upcoming_matches()
 
@@ -55,7 +55,7 @@ async def available_teams():
         } for index, team in enumerate(teams)
     ]
 
-@app.get("/probabilities")
+@app.get("/probabilities/")
 def get_probabilities(teams: List[str] = Query(...)):
     # Simulación de partidos y probabilidades
     matches = []
@@ -79,7 +79,7 @@ async def predict_match_endpoint(home_team: str, away_team: str):
     prediction = predict_match(home_team, away_team)  # Asegúrate de que esto esté correcto
     return prediction
 
-@app.get("/matches/future")
+@app.get("/matches/future/")
 async def future_matches():
     return get_future_matches()
 
@@ -95,7 +95,7 @@ def get_db():
     finally:
         db.close()
 
-@app.post("/users", response_model=schemas.User)
+@app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if db_user:
@@ -107,7 +107,7 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db.refresh(db_user)
     return db_user
 
-@app.post("/token")
+@app.post("/token/")
 def login(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.email == user_credentials.email).first()
     if not user or not pwd_context.verify(user_credentials.password, user.hashed_password):
