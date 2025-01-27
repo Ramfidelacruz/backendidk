@@ -13,6 +13,7 @@ import random
 
 
 
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -21,7 +22,7 @@ SECRET_KEY = "tu_clave_secreta"
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permite todas las origins
+    allow_origins=["https://elaborate-baklava-cf7e2d.netlify.app"],  # Tu dominio de Netlify
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
