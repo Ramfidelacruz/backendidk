@@ -37,3 +37,6 @@ class Prediction(PredictionBase):
 class PasswordReset(BaseModel):
     email: str
     new_password: str
+
+class Config:
+    from_attributes = True
