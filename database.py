@@ -3,8 +3,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 
-# Intenta obtener la URL de la variable de entorno, si no existe usa un valor por defecto
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:WBvpQkJFuufMCnhVukvyxlttdUMmINYb@postgres.railway.internal:5432/railway")
+# Usar la URL pública correcta
+DATABASE_URL = os.getenv("DATABASE_PUBLIC_URL", "postgresql://postgres:WBvpQkJFuufMCnhVukvyxlttdUMmINYb@junction.proxy.rlwy.net:51532/railway")
 
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
