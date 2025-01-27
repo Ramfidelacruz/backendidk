@@ -3,8 +3,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+# Intenta obtener la URL de la variable de entorno, si no existe usa un valor por defecto
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:WBvpQkJFuufMCnhVukvyxlttdUMmINYb@postgres.railway.internal:5432/railway")
+
+if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 engine = create_engine(DATABASE_URL)
