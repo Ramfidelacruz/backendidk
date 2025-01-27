@@ -22,9 +22,9 @@ SECRET_KEY = "tu_clave_secreta"
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://elaborate-baklava-cf7e2d.netlify.app"],  # Específico para tu dominio
+    allow_origins=["https://elaborate-baklava-cf7e2d.netlify.app", "https://tu-otra-url.netlify.app"],  # Añade aquí otras URLs si es necesario
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Más específico
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
