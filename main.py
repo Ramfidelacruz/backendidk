@@ -22,7 +22,7 @@ SECRET_KEY = "tu_clave_secreta"
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://elaborate-baklava-cf7e2d.netlify.app"],  # Específico para tu dominio
+    allow_origins=["*"],  # Permitir todos los orígenes (solo para pruebas)
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
@@ -97,6 +97,7 @@ def get_db():
 
 @app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    print(f"Solicitud para crear usuario: {user.email}")
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="Email ya registrado")
@@ -105,15 +106,19 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
+    print(f"Usuario creado: {db_user.email}")
     return db_user
 
 @app.post("/token/")
 def login(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):
+    print(f"Intento de inicio de sesión para: {user_credentials.email}")
     user = db.query(models.User).filter(models.User.email == user_credentials.email).first()
     if not user or not pwd_context.verify(user_credentials.password, user.hashed_password):
+        print("Credenciales incorrectas")
         raise HTTPException(status_code=401, detail="Credenciales incorrectas")
     
     access_token = create_access_token(data={"sub": user.email})
+    print(f"Inicio de sesión exitoso para: {user.email}")
     return {"access_token": access_token, "token_type": "bearer"}
 
 @app.post("/predictions/", response_model=schemas.Prediction)
