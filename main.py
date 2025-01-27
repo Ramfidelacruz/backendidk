@@ -22,11 +22,10 @@ SECRET_KEY = "tu_clave_secreta"
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=["https://elaborate-baklava-cf7e2d.netlify.app"],  # Específico para tu dominio
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Más específico
     allow_headers=["*"],
-    expose_headers=["*"]
 )
 
 @app.get("/matches/")
