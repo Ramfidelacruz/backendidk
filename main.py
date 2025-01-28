@@ -44,7 +44,7 @@ async def upcoming_matches():
 async def team_matches(team_name: str):
     return get_team_matches(team_name)
 
-@app.get("/teams")
+@app.get("/teams/")
 async def available_teams():
     teams = get_available_teams()
     return [
