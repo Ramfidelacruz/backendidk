@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 import os
 
 # URL de la base de datos directamente en el código
-DATABASE_URL = "postgresql://postgres:GrVAydIjIxIJvmVZgNBkAaHpVRmkIotr@autorack.proxy.rlwy.net:36139/railway"
+DATABASE_URL = "https://postgres-production-c327.up.railway.app/"
 
 # Asegurarse de usar postgresql:// en lugar de postgres://
 if DATABASE_URL.startswith("postgres://"):
