@@ -3,12 +3,13 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 
-# URL de la base de datos directamente en el código
-DATABASE_URL = "https://postgres-production-c327.up.railway.app/"
+# URL de la base de datos directamente en el código, se volvio a la urloriginal
 
-''' # Asegurarse de usar postgresql:// en lugar de postgres://
+DATABASE_URL = "postgresql://postgres:GrVAydIjIxIJvmVZgNBkAaHpVRmkIotr@autorack.proxy.rlwy.net:36139/railway"
+
+# Asegurarse de usar postgresql:// en lugar de postgres://
 if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1) '''
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
