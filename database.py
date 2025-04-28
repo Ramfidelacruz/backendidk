@@ -5,7 +5,10 @@ import os
 
 # URL de la base de datos directamente en el código, se volvio a la urloriginal
 
-DATABASE_URL = "postgresql://postgres:GrVAydIjIxIJvmVZgNBkAaHpVRmkIotr@autorack.proxy.rlwy.net:36139/railway"
+#DATABASE_URL = "postgresql://postgres:GrVAydIjIxIJvmVZgNBkAaHpVRmkIotr@autorack.proxy.rlwy.net:36139/railway"
+
+#URL de la base de datos de railway Ramfi
+DATABASE_URL = "postgresql://postgres:qOpllNgdKsfBwpaLoJYOLryLQlbCQZkB@maglev.proxy.rlwy.net:55989/railway"
 
 # Asegurarse de usar postgresql:// en lugar de postgres://
 if DATABASE_URL.startswith("postgres://"):
